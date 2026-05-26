@@ -1,0 +1,38 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+rule_files: []
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+
+  - job_name: api-gateway
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - api-gateway:8080
+
+  - job_name: product-service
+    static_configs:
+      - targets:
+          - product-service:5001
+
+  - job_name: cart-service
+    static_configs:
+      - targets:
+          - cart-service:5002
+
+  - job_name: order-service
+    static_configs:
+      - targets:
+          - order-service:5003
